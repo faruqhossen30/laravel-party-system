@@ -14,4 +14,9 @@ class Poll extends Model
         'status',
         'user_id',
     ];
+
+    public function options()
+    {
+        return $this->hasMany(PollOption::class, 'poll_id');
+    }
 }
