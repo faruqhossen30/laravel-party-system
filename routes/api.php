@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\User\Post\PostController;
+use App\Http\Controllers\Api\User\Post\PostlikeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,11 +22,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('user')->group(function(){
-
     Route::post('/login', [LoginController::class, 'login']);
     Route::middleware('auth:sanctum')->group(function(){
-        //
+        Route::post('post/store', [PostController::class, 'store']);
+        Route::post('post/like/{id}', [PostlikeController::class, 'postLike']);
     });
-
 });
 
+Route::get('/posts', [PostController::class, 'index']);

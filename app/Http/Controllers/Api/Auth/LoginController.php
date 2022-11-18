@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -41,32 +43,33 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+
         $request->validate([
             'email'         => 'required|email',
             'password'      => 'required'
         ]);
 
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
-            ]);
+        //
+        try {
+            if (Auth::attempt($request->only('email', 'password'))) {
+                $user = Auth::user();
+                $token = $user->createToken(uniqid())->plainTextToken;
+                $user['token'] = $token;
+                return response()->json([
+                    'message' => 'successfully login',
+                    'token' => $token,
+                    'data' => $user
+                ]);
+            };
+        } catch (Exception $exception) {
+            return response()->json([
+                'message' => $exception->getMessage()
+            ],400);
         }
 
-        // return $user->createToken($request->device_name)->plainTextToken;
-        $token = $user->createToken(uniqid())->plainTextToken;
-        // if ($request->android_token) {
-        //     $user->android_token = $request->android_token;
-        //     $user->save();
-        // }
         return response()->json([
-            'success' => true,
-            'code'    => 200,
-            'message' => 'User Successfully login !',
-            'token'   => $token,
-            'data'    => $user
-        ]);
+            'message' => 'Wrong email or password'
+        ],401);
     }
 
     // Logout
@@ -85,3 +88,38 @@ class LoginController extends Controller
         ]);
     }
 }
+
+
+
+
+//////
+// public function login(Request $request)
+//     {
+//         $request->validate([
+//             'email'         => 'required|email',
+//             'password'      => 'required'
+//         ]);
+
+//         //
+//         try{
+//             if(Auth::attempt($request->only('email', 'password'))){
+//                 $user = Auth::user();
+//                 return response()->json([
+//                     'message'=> 'successfully login',
+//                     'token'=> 'token',
+//                     'data'=> $user
+//                 ]);
+//             };
+//         }catch(Exception $exception){
+//             return response()->json([
+//                 'message'=> $exception->getMessage()
+//             ]);
+//         }
+
+//         return response()->json([
+//             'message'=> 'invalid email'
+//         ]);
+
+
+
+//     }
