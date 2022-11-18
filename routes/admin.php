@@ -1,5 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\DesignationController;
+use App\Http\Controllers\Admin\Location\DistrictController;
+use App\Http\Controllers\Admin\Location\DivisionController;
+use App\Http\Controllers\Admin\Location\UnionController;
+use App\Http\Controllers\Admin\Location\UpazilaController;
+use App\Http\Controllers\Admin\OrganizationController;
+use App\Http\Controllers\Admin\PollController;
+use App\Http\Controllers\Admin\PolloptionController;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -20,6 +28,28 @@ Route::group(['prefix' => 'admin'], function () {
             return view('admin.pages.email.compose');
         });
     });
+
+    // location start
+    Route::group(['prefix' => 'location'], function () {
+        Route::get('divisions', [DivisionController::class, 'index'])->name('division.name');
+        Route::get('districts', [DistrictController::class, 'index'])->name('district.name');
+        Route::get('upazilas', [UpazilaController::class, 'index'])->name('upazila.name');
+        Route::get('unions', [UnionController::class, 'index'])->name('union.name');
+    });
+    // location end
+
+// resources controller start
+    Route::resources([
+        'designations' => DesignationController::class,
+        'organizations' => OrganizationController::class,
+        'polls' => PollController::class,
+    ]);
+    Route::post('pull-potion/update/{id}', [PolloptionController::class,'optionUpdate'])->name('optionupdate.update');
+
+    // add more option
+    Route::get('poll/option/add-more/{id}', [PolloptionController::class,'createMoreOption'])->name('addmore.option');
+    Route::post('poll/option/add-more-store/{id}', [PolloptionController::class,'addmoreOptionStore'])->name('addmore.option.store');
+    // resources controller end
 
     Route::group(['prefix' => 'apps'], function () {
         Route::get('chat', function () {
