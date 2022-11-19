@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\Location\UpazilaController;
 use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Admin\PollController;
 use App\Http\Controllers\Admin\PolloptionController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -15,7 +17,7 @@ use Illuminate\Support\Facades\Artisan;
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
-    });
+    })->name('admin.dashboard');
 
     Route::group(['prefix' => 'email'], function () {
         Route::get('inbox', function () {
@@ -29,6 +31,15 @@ Route::group(['prefix' => 'admin'], function () {
         });
     });
 
+    // user start
+    Route::get('user', [UserController::class, 'index'])->name('user.name');
+    Route::get('user/show/{id}', [UserController::class, 'show'])->name('user.show');
+    // user end
+    // post start
+    Route::get('post', [PostController::class, 'index'])->name('post.name');
+    Route::get('user/show/{id}', [UserController::class, 'show'])->name('user.show');
+    // user end
+
     // location start
     Route::group(['prefix' => 'location'], function () {
         Route::get('divisions', [DivisionController::class, 'index'])->name('division.name');
@@ -38,17 +49,17 @@ Route::group(['prefix' => 'admin'], function () {
     });
     // location end
 
-// resources controller start
+    // resources controller start
     Route::resources([
         'designations' => DesignationController::class,
         'organizations' => OrganizationController::class,
         'polls' => PollController::class,
     ]);
-    Route::post('pull-potion/update/{id}', [PolloptionController::class,'optionUpdate'])->name('optionupdate.update');
+    Route::post('pull-potion/update/{id}', [PolloptionController::class, 'optionUpdate'])->name('optionupdate.update');
 
     // add more option
-    Route::get('poll/option/add-more/{id}', [PolloptionController::class,'createMoreOption'])->name('addmore.option');
-    Route::post('poll/option/add-more-store/{id}', [PolloptionController::class,'addmoreOptionStore'])->name('addmore.option.store');
+    Route::get('poll/option/add-more/{id}', [PolloptionController::class, 'createMoreOption'])->name('addmore.option');
+    Route::post('poll/option/add-more-store/{id}', [PolloptionController::class, 'addmoreOptionStore'])->name('addmore.option.store');
     // resources controller end
 
     Route::group(['prefix' => 'apps'], function () {

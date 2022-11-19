@@ -13,11 +13,28 @@
         <ul class="nav">
             <li class="nav-item nav-category">Main</li>
             <li class="nav-item {{ active_class(['/']) }}">
-                <a href="{{ url('admin/') }}" class="nav-link">
+                <a href="{{ route('admin.dashboard') }}" class="nav-link">
                     <i class="link-icon" data-feather="box"></i>
                     <span class="link-title">Dashboard</span>
                 </a>
             </li>
+            {{-- user start --}}
+            <li class="nav-item {{ active_class(['/']) }}">
+                <a href="{{ route('user.name') }}" class="nav-link">
+                    <i class="link-icon" data-feather="box"></i>
+                    <span class="link-title">Users</span>
+                </a>
+            </li>
+            {{-- user end --}}
+            {{-- user start --}}
+            <li class="nav-item {{ active_class(['/']) }}">
+                <a href="{{ route('post.name') }}" class="nav-link">
+                    <i class="link-icon" data-feather="box"></i>
+                    <span class="link-title">Post</span>
+                </a>
+            </li>
+            {{-- user end --}}
+
             <li class="nav-item {{ active_class(['email/*']) }}">
                 <a class="nav-link" data-bs-toggle="collapse" href="#email" role="button"
                     aria-expanded="{{ is_active_route(['email/*']) }}" aria-controls="email">
@@ -297,7 +314,8 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('admin/forms/advanced-elements') }}"
-                                class="nav-link {{ active_class(['forms/advanced-elements']) }}">Advanced Elements</a>
+                                class="nav-link {{ active_class(['forms/advanced-elements']) }}">Advanced
+                                Elements</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('admin/forms/editors') }}"
