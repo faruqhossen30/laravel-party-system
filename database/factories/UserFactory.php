@@ -18,8 +18,24 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
+            'avatar' => fake()->image('public/storage/users', 640, 480, null, false),
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'mobile' => rand(00000000000, 99999999999),
+            'dob' => fake()->dateTimeThisCentury->format('Y-m-d'),
+            'gender' => 'male',
+            'division' => rand(1, 8),
+            'district' => rand(1, 64),
+            'upazila' => rand(1, 491),
+            'unions' => rand(1, 4540),
+            'is_admin' => 0,
+            'occupation' => fake()->name(),
+            'relation_status' => rand(0, 1),
+            'blood' => 'O+',
+            'website' => fake()->domainName(),
+            'facebook' => fake()->domainName(),
+            'youtube' => fake()->domainName(),
+            'twitter' => fake()->domainName(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),

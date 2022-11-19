@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Devfaysal\BangladeshGeocode\Models\Division;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -35,6 +37,11 @@ class User extends Authenticatable
         'youtube',
         'twitter',
     ];
+
+    public function division()
+    {
+        return $this->hasOne(Division::class, 'division_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
