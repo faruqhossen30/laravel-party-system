@@ -44,7 +44,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::with('user','photo')->withCount('likes')->latest()->paginate(3);
+        $posts = Post::with('user','photo')->withCount('likes')->latest()->paginate(10);
         return response()->json($posts);
     }
 }

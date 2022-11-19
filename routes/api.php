@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\PeoplelistController;
+use App\Http\Controllers\Api\PolllistController;
 use App\Http\Controllers\Api\User\Post\PostController;
 use App\Http\Controllers\Api\User\Post\PostlikeController;
 use Illuminate\Http\Request;
@@ -32,3 +33,4 @@ Route::prefix('user')->group(function(){
 
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/people', [PeoplelistController::class, 'index']);
+Route::get('/polls', [PolllistController::class, 'index']);
