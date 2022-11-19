@@ -19,7 +19,6 @@ return new class extends Migration
             $table->text('body');
             $table->integer('like')->nullable()->default(0);
             $table->integer('type')->nullable()->default(0);
-            $table->integer('type')->nullable()->default(0);
             $table->boolean('status')->default(1);
             $table->timestamps();
         });
