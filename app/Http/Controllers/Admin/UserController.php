@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Devfaysal\BangladeshGeocode\Models\District;
+use Devfaysal\BangladeshGeocode\Models\Division;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -11,7 +13,10 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate(10);
-        // return $users;
+        $divisions=Division::get();
+        $districts=District::get();
+        // return $districts;
+
         return view('admin.user.index', compact('users'));;
     }
 

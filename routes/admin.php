@@ -37,6 +37,9 @@ Route::group(['prefix' => 'admin'], function () {
     // user end
     // post start
     Route::get('post', [PostController::class, 'index'])->name('post.name');
+    Route::get('post/active/{id}',[PostController::class,'postActive'])->name('post.active');
+    Route::get('post/inactive/{id}',[PostController::class,'postInactive'])->name('post.inactive');
+
     Route::get('user/show/{id}', [UserController::class, 'show'])->name('user.show');
     // user end
 
@@ -55,6 +58,12 @@ Route::group(['prefix' => 'admin'], function () {
         'organizations' => OrganizationController::class,
         'polls' => PollController::class,
     ]);
+
+    // poll public protected private
+    Route::get('poll/public/{id}',[PollController::class,'pollPublic'])->name('poll.public');
+    Route::get('poll/protected/{id}',[PollController::class,'pollProtected'])->name('poll.protected');
+    Route::get('poll/private/{id}',[PollController::class,'pollPrivate'])->name('poll.private');
+
     Route::post('pull-potion/update/{id}', [PolloptionController::class, 'optionUpdate'])->name('optionupdate.update');
 
     // add more option
