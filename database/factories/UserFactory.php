@@ -18,12 +18,13 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'avatar' => fake()->image('public/storage/users', 640, 480, null, false),
+            'avatar' => '',
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'mobile' => rand(00000000000, 99999999999),
             'dob' => fake()->dateTimeThisCentury->format('Y-m-d'),
             'gender' => 'male',
+            'gender' => fake()->address(),
             'division' => rand(1, 8),
             'district' => rand(1, 64),
             'upazila' => rand(1, 491),

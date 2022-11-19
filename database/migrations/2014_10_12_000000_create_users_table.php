@@ -24,6 +24,10 @@ return new class extends Migration
             $table->boolean('is_admin')->nullable()->default(0);
             $table->string('occupation')->nullable();
             $table->text('address')->nullable();
+            $table->integer('division')->nullable();
+            $table->integer('district')->nullable();
+            $table->integer('upazila')->nullable();
+            $table->integer('unions')->nullable();
             $table->string('relation_status')->nullable();
             $table->string('blood')->nullable();
             $table->string('website')->nullable();
