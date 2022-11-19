@@ -15,8 +15,8 @@
                                 <thead>
                                     <tr>
                                         <th>S.L</th>
-                                        <th> Title  </th>
-                                        <th> Status </th>
+                                        <th> Title </th>
+                                        <th> Type </th>
                                         <th> Total Option </th>
                                         <th> User ID </th>
                                         <th> Action </th>
@@ -24,26 +24,38 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($polls as $poll)
-                                    <tr>
-                                        <td>{{ $poll->id }}</td>
-                                        <td>{{ $poll->title }}</td>
-                                        <td>{{ $poll->status }}</td>
-                                        <td>{{ $poll->options_count }}</td>
-                                        <td>{{ $poll->user_id }}</td>
-                                        <td>
-                                            <a href="{{ route('addmore.option',$poll->id) }}" class="btn btn-sm btn-info text-white">Add More</a>
-                                            <a href="{{ route('polls.edit', $poll->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                        <tr>
+                                            <td>{{ $poll->id }}</td>
+                                            <td>{{ $poll->title }}</td>
+                                            {{--  <td>{{ $poll->status }}</td>  --}}
+                                            <td>
+                                                @if ($poll->type == 1)
+                                                    <a href="{{ route('poll.public', $poll->id) }}">Public</a>
+                                                @elseif ($poll->type == 2)
+                                                    <a href="{{ route('poll.protected', $poll->id) }}">Protected</a>
+                                                @elseif ($poll->type == 3)
+                                                    <a href="{{ route('poll.private', $poll->id) }}">Private</a>
+                                                @endif
+                                            </td>
+                                            <td>{{ $poll->options_count }}</td>
+                                            <td>{{ $poll->user_id }}</td>
+                                            <td>
+                                                <a href="{{ route('addmore.option', $poll->id) }}"
+                                                    class="btn btn-sm btn-info text-white">Add More</a>
+                                                <a href="{{ route('polls.edit', $poll->id) }}"
+                                                    class="btn btn-sm btn-primary">Edit</a>
 
-                                            <form action="{{ route('polls.destroy', $poll->id) }}" method="POST"
-                                                style="display:inline-block">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" onclick="return confirm('Are You Sure to Delete?')"
-                                                    class="btn btn-sm btn-danger">Delete</button>
-                                            </form>
+                                                <form action="{{ route('polls.destroy', $poll->id) }}" method="POST"
+                                                    style="display:inline-block">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        onclick="return confirm('Are You Sure to Delete?')"
+                                                        class="btn btn-sm btn-danger">Delete</button>
+                                                </form>
 
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>

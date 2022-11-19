@@ -13,4 +13,19 @@ class PostController extends Controller
         $posts = Post::with('user')->paginate(10);
         return view('admin.post.index', compact('posts'));
     }
+
+
+
+    // active
+    public function postActive($id)
+    {
+        Post::findOrFail($id)->update(['status'=>1]);
+        return back();
+    }
+    // active
+    public function postInactive($id)
+    {
+        Post::findOrFail($id)->update(['status'=>0]);
+        return back();
+    }
 }

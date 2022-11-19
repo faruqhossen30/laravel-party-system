@@ -43,10 +43,12 @@ class PollController extends Controller
         // return $request->all();
         $request->validate([
             'title' => 'required',
+            'status' => 'required',
         ]);
 
         $poll = Poll::create([
             'title' => $request->title,
+            'status' => $request->status,
             'user_id' => Auth::user()->id
         ]);
 
@@ -84,8 +86,9 @@ class PollController extends Controller
     public function edit($id)
     {
         $poll = Poll::with('options')->firstWhere('id', $id);
-        // return $poll;
-        return view('admin.poll.edit',compact('poll'));
+        $status=Poll::all();
+        // return $status;
+        return view('admin.poll.edit',compact('poll','status'));
     }
 
     /**
@@ -99,6 +102,7 @@ class PollController extends Controller
     {
         $poll = Poll::where('id',$id)->update([
             'title' => $request->title,
+            'type' => $request->type,
             'user_id' => Auth::user()->id
         ]);
 
@@ -128,4 +132,24 @@ class PollController extends Controller
         Poll::where('id', $id)->delete();
         return redirect()->route('polls.index');
     }
+
+    // poll public
+    public function pollPublic($id)
+    {
+        Poll::findOrFail($id)->update(['type'=>1]);
+        return back();
+    }
+    // poll public
+    public function pollProtected($id)
+    {
+        Poll::findOrFail($id)->update(['type'=>2]);
+        return back();
+    }
+    // poll public
+    public function pollPrivate($id)
+    {
+         Poll::findOrFail($id)->update(['type'=>3]);
+        return back();
+    }
+
 }

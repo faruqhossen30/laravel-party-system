@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('polls', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->boolean('status')->default(1);
+            $table->boolean('type')->default(1);
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });

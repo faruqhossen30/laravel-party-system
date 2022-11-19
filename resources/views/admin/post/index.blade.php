@@ -17,6 +17,7 @@
                                         <th>Body</th>
                                         <th>Like</th>
                                         <th>Type</th>
+                                        <th>Status</th>
                                         <th>User</th>
                                     </tr>
                                 </thead>
@@ -24,9 +25,17 @@
                                     @foreach ($posts as $key => $post)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $post->body }}</td>
+                                            {{--  <td>{{ $post->body }}</td>  --}}
+                                            <td>{{ $post->like }}</td>
                                             <td>{{ $post->like }}</td>
                                             <td>{{ $post->type }}</td>
+                                            <td>
+                                                @if ($post->status == 1)
+                                                    <a href="{{ route('post.active', $post->id) }}">Active</a>
+                                                @elseif ($post->status == 0)
+                                                    <a href="{{ route('post.inactive', $post->id) }}">Inactive</a>
+                                                @endif
+                                            </td>
                                             <td>{{ $post->user->name }}</td>
                                         </tr>
                                     @endforeach
