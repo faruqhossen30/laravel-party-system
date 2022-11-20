@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\PeoplelistController;
 use App\Http\Controllers\Api\PolllistController;
+use App\Http\Controllers\Api\User\Poll\PollattendanceController;
 use App\Http\Controllers\Api\User\Post\PostController;
 use App\Http\Controllers\Api\User\Post\PostlikeController;
 use Illuminate\Http\Request;
@@ -28,6 +29,9 @@ Route::prefix('user')->group(function(){
     Route::middleware('auth:sanctum')->group(function(){
         Route::post('post/store', [PostController::class, 'store']);
         Route::post('post/like/{id}', [PostlikeController::class, 'postLike']);
+        // Poll
+        Route::post('poll/option/attendance/{id}', [PollattendanceController::class, 'pollStore']);
+
     });
 });
 

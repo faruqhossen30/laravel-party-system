@@ -6,9 +6,9 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Poll>
  */
-class PostFactory extends Factory
+class PollFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,10 +18,9 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => rand(1,50),
-            'body' => fake()->text(),
-            'like' => rand(1, 999),
-            'type' => rand(0, 1)
+            'title' => fake()->sentence(),
+            'type' => rand(1, 3),
+            'user_id' => rand(1,50)
         ];
     }
 }

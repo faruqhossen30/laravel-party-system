@@ -10,7 +10,7 @@ class PolllistController extends Controller
 {
     public function index()
     {
-        $polls = Poll::get();
+        $polls = Poll::with('options')->paginate(10);
         return response()->json($polls);
     }
 }
