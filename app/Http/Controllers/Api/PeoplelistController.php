@@ -12,6 +12,12 @@ class PeoplelistController extends Controller
     {
         $people = User::take(5)->get();
         return response()->json($people);
-        return 'some';
+    }
+
+    public function singlePeople(Request $request, $id)
+    {
+        $people = User::firstWhere('id', $id);
+        return response()->json($people);
+
     }
 }

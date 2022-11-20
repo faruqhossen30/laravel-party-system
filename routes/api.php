@@ -40,4 +40,5 @@ Route::prefix('user')->group(function(){
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/post/{id}', [PostController::class, 'singlePost']);
 Route::get('/people', [PeoplelistController::class, 'index']);
+Route::get('/people/{id}', [PeoplelistController::class, 'singlePeople']);
 Route::get('/polls', [PolllistController::class, 'index']);

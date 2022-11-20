@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Poll\PollAttendance;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,4 +15,8 @@ class PollOption extends Model
         'option',
         'count',
     ];
+    public function attendences()
+    {
+        return $this->hasMany(PollAttendance::class, 'poll_id');
+    }
 }
