@@ -17,6 +17,6 @@ class PollOption extends Model
     ];
     public function attendences()
     {
-        return $this->hasMany(PollAttendance::class, 'poll_id');
+        return $this->hasMany(PollAttendance::class,'id');
     }
 }
