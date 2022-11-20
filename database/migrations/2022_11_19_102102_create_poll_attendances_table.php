@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('poll_attendances', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('poll_id');
             $table->unsignedBigInteger('poll_option_id');

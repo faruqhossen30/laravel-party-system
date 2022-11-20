@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\PeoplelistController;
 use App\Http\Controllers\Api\PolllistController;
 use App\Http\Controllers\Api\User\Poll\PollattendanceController;
@@ -26,6 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('user')->group(function(){
     Route::post('/login', [LoginController::class, 'login']);
+    Route::post('/register', [RegisterController::class, 'store']);
     Route::middleware('auth:sanctum')->group(function(){
         Route::post('post/store', [PostController::class, 'store']);
         Route::post('post/like/{id}', [PostlikeController::class, 'postLike']);
@@ -36,5 +38,6 @@ Route::prefix('user')->group(function(){
 });
 
 Route::get('/posts', [PostController::class, 'index']);
+Route::get('/post/{id}', [PostController::class, 'singlePost']);
 Route::get('/people', [PeoplelistController::class, 'index']);
 Route::get('/polls', [PolllistController::class, 'index']);
