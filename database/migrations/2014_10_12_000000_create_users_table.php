@@ -36,6 +36,10 @@ return new class extends Migration
             $table->string('twitter')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->unsignedBigInteger('division_id')->nullable();
+            $table->unsignedBigInteger('district_id')->nullable();
+            $table->unsignedBigInteger('upazila_id')->nullable();
+            $table->unsignedBigInteger('union_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
