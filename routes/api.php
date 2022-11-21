@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\PeoplelistController;
 use App\Http\Controllers\Api\PolllistController;
+use App\Http\Controllers\Api\User\Follower\FollowerController;
 use App\Http\Controllers\Api\User\Poll\PollattendanceController;
 use App\Http\Controllers\Api\User\Poll\PolloptionController;
 use App\Http\Controllers\Api\User\Post\PostController;
@@ -34,13 +35,17 @@ Route::prefix('user')->group(function(){
         Route::post('post/like/{id}', [PostlikeController::class, 'postLike']);
         // Poll
         Route::post('poll/option/attendance/{id}', [PollattendanceController::class, 'pollStore']);
+        // Follow
+        Route::post('follow/{id}', [FollowerController::class, 'followRequest']);
+        Route::get('/follow/suggestion', [PeoplelistController::class, 'suggestionPeople']);
 
     });
 });
 
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/post/{id}', [PostController::class, 'singlePost']);
-Route::get('/people', [PeoplelistController::class, 'index']);
-Route::get('/people/{id}', [PeoplelistController::class, 'singlePeople']);
 Route::get('/polls', [PolllistController::class, 'index']);
 Route::get('/poll/option/{id}', [PolloptionController::class, 'pollOptionById']);
+// Folling People
+Route::get('/people', [PeoplelistController::class, 'index']);
+Route::get('/people/{id}', [PeoplelistController::class, 'singlePeople']);
