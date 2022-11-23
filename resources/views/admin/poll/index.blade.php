@@ -15,10 +15,11 @@
                                 <thead>
                                     <tr>
                                         <th>S.L</th>
-                                        <th> Title </th>
+                                        <th style="width: 15%;"> Title </th>
                                         <th> Type </th>
                                         <th> Total Option </th>
                                         <th> User ID </th>
+                                        <th> Add User</th>
                                         <th> Action </th>
                                     </tr>
                                 </thead>
@@ -40,10 +41,22 @@
                                             <td>{{ $poll->options_count }}</td>
                                             <td>{{ $poll->user_id }}</td>
                                             <td>
+
+                                                @if ($poll->type == 3)
+                                                <a href="{{ route('permissionforpoll.create', $poll->id) }}"
+                                                    class="btn btn-sm btn-info text-white"><i data-feather="user-plus"></i></a>
+
+                                                    <a href="{{ route('access.user.list', $poll->id) }}"
+                                                        class="btn btn-sm btn-primary text-white"><i data-feather="eye"></i></a>
+                                                    <a href="{{ route('edit.access.user', $poll->id) }}"
+                                                        class="btn btn-sm btn-warning text-white"> <i data-feather="edit"></i></a>
+                                                @endif
+                                            </td>
+                                            <td>
                                                 <a href="{{ route('addmore.option', $poll->id) }}"
-                                                    class="btn btn-sm btn-info text-white">Add More</a>
+                                                    class="btn btn-sm btn-info text-white"> <i data-feather="plus"></i></a>
                                                 <a href="{{ route('polls.edit', $poll->id) }}"
-                                                    class="btn btn-sm btn-primary">Edit</a>
+                                                    class="btn btn-sm btn-primary"> <i data-feather="edit"></i></a>
 
                                                 <form action="{{ route('polls.destroy', $poll->id) }}" method="POST"
                                                     style="display:inline-block">
@@ -51,7 +64,7 @@
                                                     @method('DELETE')
                                                     <button type="submit"
                                                         onclick="return confirm('Are You Sure to Delete?')"
-                                                        class="btn btn-sm btn-danger">Delete</button>
+                                                        class="btn btn-sm btn-danger"> <i data-feather="trash"></i></button>
                                                 </form>
 
                                             </td>

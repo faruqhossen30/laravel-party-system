@@ -37,8 +37,8 @@ Route::group(['prefix' => 'admin'], function () {
     // user end
     // post start
     Route::get('post', [PostController::class, 'index'])->name('post.name');
-    Route::get('post/active/{id}',[PostController::class,'postActive'])->name('post.active');
-    Route::get('post/inactive/{id}',[PostController::class,'postInactive'])->name('post.inactive');
+    Route::get('post/active/{id}', [PostController::class, 'postActive'])->name('post.active');
+    Route::get('post/inactive/{id}', [PostController::class, 'postInactive'])->name('post.inactive');
 
     Route::get('user/show/{id}', [UserController::class, 'show'])->name('user.show');
     // user end
@@ -60,15 +60,22 @@ Route::group(['prefix' => 'admin'], function () {
     ]);
 
     // poll public protected private
-    Route::get('poll/public/{id}',[PollController::class,'pollPublic'])->name('poll.public');
-    Route::get('poll/protected/{id}',[PollController::class,'pollProtected'])->name('poll.protected');
-    Route::get('poll/private/{id}',[PollController::class,'pollPrivate'])->name('poll.private');
+    Route::get('poll/public/{id}', [PollController::class, 'pollPublic'])->name('poll.public');
+    Route::get('poll/protected/{id}', [PollController::class, 'pollProtected'])->name('poll.protected');
+    Route::get('poll/private/{id}', [PollController::class, 'pollPrivate'])->name('poll.private');
 
     Route::post('pull-potion/update/{id}', [PolloptionController::class, 'optionUpdate'])->name('optionupdate.update');
 
     // add more option
     Route::get('poll/option/add-more/{id}', [PolloptionController::class, 'createMoreOption'])->name('addmore.option');
     Route::post('poll/option/add-more-store/{id}', [PolloptionController::class, 'addmoreOptionStore'])->name('addmore.option.store');
+
+    // add more User
+    Route::get('poll/option/user-list/{id}', [PolloptionController::class, 'accessUserList'])->name('access.user.list');
+    Route::get('poll/option/add-user/{id}', [PolloptionController::class, 'createUserOption'])->name('permissionforpoll.create');
+    Route::post('poll/option/add-user-store/{id}', [PolloptionController::class, 'addUserStore'])->name('add.user.option.store');
+    Route::get('poll/option/edit-user/{id}', [PolloptionController::class, 'editUser'])->name('edit.access.user');
+    Route::PUT('poll/option/update-user/{id}', [PolloptionController::class, 'updateUser'])->name('user.access.update');
     // resources controller end
 
     Route::group(['prefix' => 'apps'], function () {

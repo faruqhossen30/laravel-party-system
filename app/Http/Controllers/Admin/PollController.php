@@ -139,13 +139,13 @@ class PollController extends Controller
         Poll::findOrFail($id)->update(['type'=>1]);
         return back();
     }
-    // poll public
+    // poll protected
     public function pollProtected($id)
     {
         Poll::findOrFail($id)->update(['type'=>2]);
         return back();
     }
-    // poll public
+    // poll private
     public function pollPrivate($id)
     {
          Poll::findOrFail($id)->update(['type'=>3]);
