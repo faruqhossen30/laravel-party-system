@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->boolean('type')->default(1);
             $table->unsignedBigInteger('user_id');
+            $table->boolean('status')->nullable()->default(1);
             $table->timestamps();
         });
     }

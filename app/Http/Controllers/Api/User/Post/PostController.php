@@ -53,4 +53,10 @@ class PostController extends Controller
         $post= Post::with('user')->withCount('likes')->firstWhere('id', $id);
         return response()->json($post);
     }
+
+    public function peoplePost($id)
+    {
+        $posts = Post::where('user_id', $id)->with('user','photo')->withCount('likes')->latest()->paginate();
+        return response()->json($posts);
+    }
 }

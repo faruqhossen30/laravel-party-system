@@ -43,7 +43,6 @@ class User extends Authenticatable
         'union_id',
     ];
 
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -62,6 +61,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 
     public function division()
     {
@@ -83,5 +83,12 @@ class User extends Authenticatable
     }
 
 
-  
+    public function following()
+    {
+        return $this->hasMany(Follower::class, 'user_id');
+    }
+    public function followers()
+    {
+        return $this->hasMany(Follower::class, 'follower_id');
+    }
 }
