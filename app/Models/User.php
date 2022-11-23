@@ -43,24 +43,7 @@ class User extends Authenticatable
         'union_id',
     ];
 
-    public function division()
-    {
-        return $this->hasOne(Division::class, 'division_id');
-    }
 
-    public function getDistrict()
-    {
-        return $this->hasOne(District::class, 'id', 'district_id');
-    }
-
-    public function getUpazila()
-    {
-        return $this->hasOne(Upazila::class, 'id', 'upazila_id');
-    }
-    public function getUnion()
-    {
-        return $this->hasOne(Union::class, 'id', 'union_id');
-    }
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -79,4 +62,26 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function division()
+    {
+        return $this->hasOne(Division::class, 'division_id');
+    }
+
+    public function getDistrict()
+    {
+        return $this->hasOne(District::class, 'id', 'district_id');
+    }
+
+    public function getUpazila()
+    {
+        return $this->hasOne(Upazila::class, 'id', 'upazila_id');
+    }
+    public function getUnion()
+    {
+        return $this->hasOne(Union::class, 'id', 'union_id');
+    }
+
+
+  
 }
