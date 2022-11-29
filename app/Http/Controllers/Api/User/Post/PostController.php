@@ -42,6 +42,26 @@ class PostController extends Controller
         return response()->json($post);
     }
 
+    public function update(Request $request,Post $post)
+    {
+        if($request->user()->id != $post->user_id){
+            return response()->json(["message"=>"Unauthenticated."], 401);
+        }
+        $post->update([
+            'body'=>$request->body
+        ]);
+
+        return $post;
+    }
+    public function destroy(Request $request,Post $post)
+    {
+        if($request->user()->id != $post->user_id){
+            return response()->json(["message"=>"Unauthenticated."], 401);
+        }
+        $post->delete();
+        return response()->json(['message'=>'Post has been deleted !'], 202);
+    }
+
     public function index()
     {
         $posts = Post::with('user','photo')->withCount('likes')->latest()->paginate(10);

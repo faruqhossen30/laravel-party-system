@@ -46,8 +46,10 @@ Route::prefix('user')->group(function(){
         Route::post('profile/name', [ProfileController::class, 'name']);
         Route::post('profile/avatar', [ProfileController::class, 'avatar']);
         Route::post('profile/address', [ProfileController::class, 'address']);
-
+        // Post
         Route::post('post/store', [PostController::class, 'store']);
+        Route::post('post/update/{post}', [PostController::class, 'update']);
+        Route::post('post/destroy/{post}', [PostController::class, 'destroy']);
         Route::post('post/like/{id}', [PostlikeController::class, 'postLike']);
         // Poll
         Route::post('poll/option/attendance/{id}', [PollattendanceController::class, 'pollStore']);
