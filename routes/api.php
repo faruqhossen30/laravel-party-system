@@ -46,6 +46,9 @@ Route::prefix('user')->group(function(){
         Route::post('profile/name', [ProfileController::class, 'name']);
         Route::post('profile/avatar', [ProfileController::class, 'avatar']);
         Route::post('profile/address', [ProfileController::class, 'address']);
+        Route::post('profile/contact', [ProfileController::class, 'contact']);
+        Route::post('profile/social', [ProfileController::class, 'social']);
+        Route::post('profile/aditional_info', [ProfileController::class, 'aditional_info']);
         // Post
         Route::post('post/store', [PostController::class, 'store']);
         Route::post('post/update/{post}', [PostController::class, 'update']);

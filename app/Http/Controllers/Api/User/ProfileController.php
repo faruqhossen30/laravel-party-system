@@ -71,6 +71,7 @@ class ProfileController extends Controller
         return response()->json($user);
 
     }
+
     public function name(Request $request)
     {
         // return $request->all();
@@ -83,5 +84,60 @@ class ProfileController extends Controller
         $user->save();
         return response()->json($user);
 
+    }
+
+    public function contact(Request $request)
+    {
+        // return $request->all();
+        $request->validate([
+            'email'=> 'required',
+            'mobile'=> 'required',
+        ]);
+        $user = User::firstWhere('id', $request->user()->id);
+
+        $user->email = $request->email;
+        $user->mobile = $request->mobile;
+        $user->save();
+        return response()->json($user);
+    }
+
+    public function aditional_info(Request $request)
+    {
+        // return $request->all();
+        $request->validate([
+            'dob'=> 'required',
+            'gender'=> 'required',
+            'occupation'=> 'required',
+            'relation_status'=> 'required',
+            'blood'=> 'required',
+        ]);
+        $user = User::firstWhere('id', $request->user()->id);
+
+        $user->dob = $request->dob;
+        $user->gender = $request->gender;
+        $user->occupation = $request->occupation;
+        $user->relation_status = $request->relation_status;
+        $user->blood = $request->blood;
+        $user->save();
+        return response()->json($user);
+    }
+
+    public function social(Request $request)
+    {
+        // return $request->all();
+        $request->validate([
+            'website'=> 'required',
+            'facebook'=> 'required',
+            'youtube'=> 'required',
+            'twitter'=> 'required',
+        ]);
+        $user = User::firstWhere('id', $request->user()->id);
+
+        $user->website = $request->website;
+        $user->facebook = $request->facebook;
+        $user->youtube = $request->youtube;
+        $user->twitter = $request->twitter;
+        $user->save();
+        return response()->json($user);
     }
 }
